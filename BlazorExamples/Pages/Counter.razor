@@ -7,12 +7,25 @@
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<input @ref="firstInput" />
+<input @ref="secondInput" />
 
 @code {
     private int currentCount = 0;
+    private ElementReference firstInput;
+    private ElementReference secondInput;
 
-    private void IncrementCount()
+    private async void IncrementCount()
     {
         currentCount++;
+
+        if(currentCount % 2 == 0)
+        {
+            await firstInput.FocusAsync();
+        }
+        else
+        {
+            await secondInput.FocusAsync();
+        }
     }
 }
